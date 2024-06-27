@@ -1,7 +1,6 @@
 ##
 Olá! Eu sou o Guilherme Cardoso!
 
-- 🔭 Hoje trabalho como Analista Financeiro Jr.
 - 🌱 Sou estudante de Análise e Desenvolvimento de Sistemas Fullstack e Mobile - PUCRS
 - 👯 Procuro oportunidades para estudantes da área de programação
 ##
