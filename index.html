@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa do Maroto - Convite de Aniversário</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cormorant Garamond', serif;
+            background-color: #fdf4dc;
+            color: #4b2e18;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #main {
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #map-wrapper {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #map-wrapper.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .parchment {
+            background-color: #f8ecc2; /* Cor de fundo do pergaminho */
+            border: 2px solid #4b2e18;
+            padding: 250px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            position: relative;
+            z-index: 1; /* Garantir que o conteúdo fique acima */
+        }
+        .parchment::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./images/4101ca9f94f71e3aaffd5c4b07c921bc.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1; /* Reduz a opacidade da imagem de fundo */
+            z-index: -1; /* A imagem fica abaixo do conteúdo */
+        }
+
+        #phrase-input {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #4b2e18;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #4b2e18;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6a4529;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footstep {
+            position: absolute;
+            width: 15px;
+            height: 22px;
+            background: url('./images/pngwing.com.png'); /* Imagem de pegada */
+            background-size: cover;
+            opacity: 0.8;
+            animation: fade 3s linear infinite;
+        }
+
+        @keyframes fade {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        @media (max-width: 480px) {
+            .parchment {
+                padding: 15px;
+                width: 95%;
+            }
+
+            #phrase-input {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+
+            button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            .footstep {
+                width: 15px;
+                height: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="input-wrapper" class="parchment">
+            <h1>Os senhores Aluado, Almofadinhas, Rabicho e Pontas estão orgulhosos em lhes apresentar...</h1>
+            <p>Digite a frase mágica para revelar o convite:</p>
+            <input type="text" id="phrase-input" placeholder="Digite aqui...">
+            <button id="reveal-button">Ativar</button>
+        </div>
+
+        <div id="map-wrapper" class="parchment">
+            <h2>O convite de aniversário da Eduarda e do Guilherme!</h2>
+            <p>Você provou não ser um trouxa bisbilhoteiro e por este motivo, está convidado para o nosso aniversário.</p>
+            <p><strong>Data:</strong> 14/12/2024</p>
+            <p><strong>Horário:</strong> 20:00</p>
+            <p><strong>Local:</strong> R. Porto Rico, 206 - Sumaré, Alvorada - RS, 94824-080</p>
+            <p>Venha preparado para um dia de muito hambúrguer, diversão e magia!</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reveal-button').addEventListener('click', function() {
+            const input = document.getElementById('phrase-input').value;
+            const magicPhrase = "Eu juro solenemente não fazer nada de bom";
+
+            if (input.trim() === magicPhrase) {
+                document.getElementById('input-wrapper').classList.add('hidden');
+                document.getElementById('map-wrapper').classList.add('visible');
+                startFootsteps();
+            } else {
+                alert('Frase incorreta! Tente novamente.');
+            }
+        });
+
+        function startFootsteps() {
+            const body = document.body;
+
+            setInterval(() => {
+                const footstep = document.createElement('div');
+                footstep.className = 'footstep';
+
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+
+                footstep.style.left = `${x}px`;
+                footstep.style.top = `${y}px`;
+
+                body.appendChild(footstep);
+
+                setTimeout(() => {
+                    body.removeChild(footstep);
+                }, 3000);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
